@@ -1,9 +1,19 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
+import MenuLink from "../MenuLink";
+
+import useLoginModel from "@/app/hooks/useLoginModel";
+import useSignUpModel from "@/app/hooks/useSignUpModel";
 
 const UserNav = () => {
+  const loginModel = useLoginModel();
+  const signUpModel = useSignUpModel();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="p-2 relative inline-block border rounded-full">
-      <button className="flex items-center">
+      <button onClick={() => setIsOpen(!isOpen)} className="flex items-center">
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -32,6 +42,23 @@ const UserNav = () => {
           />
         </svg>
       </button>
+
+      {isOpen && (
+        <div className="w-[220px] absolute top-[60px] right-0 border bg-white rounded-xl shadow-md cursor-pointer">
+          <MenuLink
+            label="登录"
+            onClick={() => {
+              loginModel.open();
+            }}
+          />
+          <MenuLink
+            label="注册"
+            onClick={() => {
+              signUpModel.open();
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
