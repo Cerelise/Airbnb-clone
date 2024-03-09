@@ -53,8 +53,9 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
   'http://127.0.0.1:8000',
   'http://127.0.0.1:3000',
-  'http://localhost:3000',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_AUTH = {
   "USE_JWT":True,
@@ -64,27 +65,27 @@ REST_AUTH = {
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-    "rest_framework",
-    "rest_framework.authtoken",
-    "rest_framework_simplejwt",
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 
-    "allauth",
-    "allauth.account",
+    'allauth',
+    'allauth.account',
 
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 
-    "corsheaders",
+    'corsheaders',
 
-    "useraccount",
-    "property",
+    'property',
+    'useraccount',
 ]
 
 MIDDLEWARE = [
