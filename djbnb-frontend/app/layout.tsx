@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   const content = <p>Yo</p>;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Navbar />
         <div className="pt-32">{children}</div>

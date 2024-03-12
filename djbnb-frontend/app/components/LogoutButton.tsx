@@ -1,26 +1,21 @@
-'use client';
+"use client";
 
 import { useRouter } from "next/navigation";
 
-import { resetAuthCookies } from '../lib/actions';
+import { resetAuthCookies } from "../lib/actions";
 
 import MenuLink from "./navbar/MenuLink";
 
 const LogoutButton: React.FC = () => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const submitLogout = async () => {
-        resetAuthCookies();
+  const submitLogout = async () => {
+    resetAuthCookies();
 
-        router.push('/')
-    }
+    router.push("/");
+  };
 
-    return (
-        <MenuLink
-            label="Log out"
-            onClick={submitLogout}
-        />
-    )
-}
+  return <MenuLink label="登出" onClick={submitLogout} />;
+};
 
 export default LogoutButton;

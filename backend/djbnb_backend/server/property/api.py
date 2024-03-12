@@ -6,7 +6,7 @@ from .models import Property
 from .serializers import PropertiesListSerializer
 
 @api_view(['GET'])
-@authentication_classes([])
+# @authentication_classes([])
 @permission_classes([])
 def properties_list(request):
     properties = Property.objects.all()

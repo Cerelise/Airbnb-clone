@@ -9,9 +9,9 @@ import AddPropertyButton from "./AddPropertyButton";
 import React from "react";
 
 const Navbar = async () => {
-  const userId = await getUserId()
+  const userId = await getUserId();
 
-  console.log('userId:',userId);
+  console.log("NavUserId:", userId);
 
   return (
     <nav className="w-full fixed top-0 left-0 py-6 border-b bg-white z-10">
@@ -27,9 +27,7 @@ const Navbar = async () => {
 
           <div className="flex items-center space-x-6">
             <AddPropertyButton />
-            <UserNav
-              userId={userId}
-            />
+            <UserNav userId={userId} />
           </div>
         </div>
       </div>
