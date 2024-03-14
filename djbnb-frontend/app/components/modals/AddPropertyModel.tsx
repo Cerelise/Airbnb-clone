@@ -11,9 +11,13 @@ import Categories from "../addproperty/Categories";
 import useAddPropertyModel from "@/app/hooks/usePropertyModel";
 import SelectCountry, { SelectCountryValue } from "../form/SelectCountry";
 
+import apiService from "@/app/services/apiService";
+import { useRouter } from "next/navigation";
+
 const AddPropertyModel = () => {
   // state
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState<string[]>([]);
   const [dataCategory, setDataCategory] = useState("");
   const [dataTitle, setDataTitle] = useState("");
   const [dataDescription, setDataDescription] = useState("");
@@ -26,6 +30,7 @@ const AddPropertyModel = () => {
 
   //
   const addPropertyModel = useAddPropertyModel();
+  const router = useRouter();
 
   // set datas
   const setCategory = (category: string) => {
@@ -37,6 +42,55 @@ const AddPropertyModel = () => {
       const tmpImage = event.target.files[0];
 
       setDataImage(tmpImage);
+    }
+  };
+
+  // submit
+  const submitForm = async () => {
+    console.log("submitForm");
+
+    if (
+      dataCategory &&
+      dataTitle &&
+      dataDescription &&
+      dataPrice &&
+      dataCountry &&
+      dataImage
+    ) {
+      const formData = new FormData();
+      formData.append("category", dataCategory);
+      formData.append("title", dataTitle);
+      formData.append("description", dataDescription);
+      formData.append("price_per_night", dataPrice);
+      formData.append("bedrooms", dataBedrooms);
+      formData.append("bathrooms", dataBathrooms);
+      formData.append("guests", dataGuests);
+      formData.append("country", dataCountry.label);
+      formData.append("country_code", dataCountry.value);
+      formData.append("image", dataImage);
+
+      const response = await apiService.post(
+        "/api/properties/create/",
+        formData
+      );
+
+      if (response.success) {
+        console.log("SUCCESS :-D");
+
+        router.push("/");
+
+        addPropertyModel.close();
+      } else {
+        console.log("Error");
+
+        const tmpErrors: string[] = Object.values(response).map(
+          (error: any) => {
+            return error;
+          }
+        );
+
+        setErrors(tmpErrors);
+      }
     }
   };
 
@@ -160,26 +214,38 @@ const AddPropertyModel = () => {
         <>
           <h2 className="mb-6 text-2xl">图片</h2>
           <div className="pt-3 pb-6 space-y-4">
-            <input type="file" accept="image/*" onChange={setImage} />
+            <div className="py-4 px-6 bg-gray-600 text-white rounded-xl">
+              <input type="file" accept="image/*" onChange={setImage} />
+            </div>
+            {dataImage && (
+              <div className="w-[200px] h-[150px] relative">
+                <Image
+                  fill
+                  alt="Uploaded image"
+                  src={URL.createObjectURL(dataImage)}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+            )}
           </div>
 
-          {dataImage && (
-            <div className="w-[200px] h-[150px] relative">
-              <Image
-                fill
-                alt="Uploaded image"
-                src={URL.createObjectURL(dataImage)}
-                className="w-full h-full object-cover rounded-xl"
-              />
-            </div>
-          )}
+          {errors.map((error, index) => {
+            return (
+              <div
+                key={index}
+                className="p-5 mb-4 bg-airbnb text-white rounded-xl opacity-80"
+              >
+                {error}
+              </div>
+            );
+          })}
 
           <CustomButton
             className="mb-2 bg-black hover:bg-gray-800"
             label="上一步"
             onClick={() => setCurrentStep(4)}
           />
-          <CustomButton label="下一步" onClick={() => console.log("submit")} />
+          <CustomButton label="提交" onClick={submitForm} />
         </>
       )}
     </>
