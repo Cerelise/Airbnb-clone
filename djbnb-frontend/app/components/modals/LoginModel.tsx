@@ -9,9 +9,9 @@ import CustomButton from "../form/CustomButton";
 import { handleLogin } from "@/app/lib/actions";
 import apiService from "@/app/services/apiService";
 
-const LoginModal = () => {
+const LoginModel = () => {
   const router = useRouter();
-  const loginModal = useLoginModel();
+  const loginModel = useLoginModel();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -31,7 +31,7 @@ const LoginModal = () => {
     if (response.access) {
       handleLogin(response.user.pk, response.access, response.refresh);
 
-      loginModal.close();
+      loginModel.close();
 
       router.push("/");
     } else {
@@ -74,12 +74,12 @@ const LoginModal = () => {
 
   return (
     <Modal
-      isOpen={loginModal.isOpen}
-      close={loginModal.close}
+      isOpen={loginModel.isOpen}
+      close={loginModel.close}
       label="Log in"
       content={content}
     />
   );
 };
 
-export default LoginModal;
+export default LoginModel;
