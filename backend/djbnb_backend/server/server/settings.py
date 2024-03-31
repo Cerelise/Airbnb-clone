@@ -60,9 +60,25 @@ REST_AUTH = {
     "JWT_AUTH_HTTPONLY": False
 }
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
+
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +101,7 @@ INSTALLED_APPS = [
 
     'property',
     'useraccount',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -117,6 +134,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
+ASGI_APPLICATION = 'server.asgi.application'
 
 
 # Database
@@ -132,6 +150,7 @@ DATABASES = {
         'PORT': os.environ.get("SQL_PORT"),
     }
 }
+
 
 
 # Password validation
