@@ -2,20 +2,20 @@ import Image from "next/image";
 
 interface CategoriesProps {
   dataCategory: string;
-  setCategory: (category: string) => void;
+  setupCategory: (category: string) => void;
 }
 
 const Categories: React.FC<CategoriesProps> = ({
   dataCategory,
-  setCategory,
+  setupCategory,
 }) => {
   return (
     <>
       <div className="pt-3 cursor-pointer pb-6 flex item-center space-x-12">
         <div
-          onClick={() => setCategory("Beach")}
+          onClick={() => setupCategory("beach")}
           className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${
-            dataCategory == "Beach" ? "border-gray-800" : "border-white"
+            dataCategory == "beach" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
           <Image
@@ -29,11 +29,11 @@ const Categories: React.FC<CategoriesProps> = ({
         </div>
 
         <div
-          onClick={() => setCategory("Castles")}
-          className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${(dataCategory =
-            "Camping"
-              ? "border-gray-800"
-              : "border-white")} opacity-60 hover:border-gray-200 hover:opacity-100`}
+          onClick={() => setupCategory("castle")}
+          className={`pb-4 flex flex-col items-center space-y-2 border-b-2 
+          ${
+            dataCategory == "castle" ? "border-gray-800" : "border-white"
+          } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
           <Image
             src="/categories/Castles.jpg"
@@ -42,29 +42,29 @@ const Categories: React.FC<CategoriesProps> = ({
             height={20}
           />
 
-          <span className="text-xs">Castles</span>
+          <span className="text-xs">Castle</span>
         </div>
 
         <div
-          onClick={() => setCategory("Island")}
+          onClick={() => setupCategory("islands")}
           className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${
-            dataCategory == "Island" ? "border-gray-800" : "border-white"
+            dataCategory == "islands" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
           <Image
-            src="/categories/Island.jpg"
+            src="/categories/islands.jpg"
             alt="Category - Beach"
             width={20}
             height={20}
           />
 
-          <span className="text-xs">Cabins</span>
+          <span className="text-xs">Islands</span>
         </div>
 
         <div
-          onClick={() => setCategory("Camping")}
+          onClick={() => setupCategory("camping")}
           className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${
-            dataCategory == "Camping" ? "border-gray-800" : "border-white"
+            dataCategory == "camping" ? "border-gray-800" : "border-white"
           } opacity-60 hover:border-gray-200 hover:opacity-100`}
         >
           <Image

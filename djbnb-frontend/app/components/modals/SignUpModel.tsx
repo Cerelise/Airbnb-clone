@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useSignUpModel from "@/app/hooks/useSignUpModel";
-import CustomButton from "../form/CustomButton";
+import CustomButton from "../forms/CustomButton";
 import apiService from "@/app/services/apiService";
 import { handleLogin } from "@/app/lib/actions";
 
